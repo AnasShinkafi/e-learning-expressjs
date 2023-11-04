@@ -122,14 +122,25 @@ export const getSingleCourse = CatchAsyncErrors(
 export const getAllCourses = CatchAsyncErrors(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const isCourseExist = await redis.get("allCourses");
+      if(isCourseExist) {
+        const courses = JSON.parse(isCourseExist);
+        res.status(201).json({
+          success: true,
+          courses
+        })
+      } else {
         const courses = await CourseModel.find().select(
           "-courseData.videoUrl -courseData.suggestion -courseData.questions -courseData.links"
         );
+
+        await redis.set("allCourses", JSON.stringify(courses));
         
         res.status(200).json({
           success: true,
           courses,
         });
+      }
       }
      catch (error: any) {
       return next(new ErrorHandler(error.message, 500));
@@ -460,7 +471,7 @@ export const deleteCourse = CatchAsyncErrors(async(req: Request, res: Response, 
 
     res.status(201).json({
       success: true,
-      message: "Course delete successfully",
+      message: "Course deleted successfully",
     })
 
   }catch (error: any) {

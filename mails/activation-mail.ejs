@@ -42,7 +42,7 @@
             margin: 0 auto;
         }
         .email-header {
-            background-color: #0070f3;
+            background-color: #00f3f3;
             padding: 24px;
             color: #ffffff;
         }
@@ -74,7 +74,7 @@
             <h1>Welcome to E-learning</h1>
         </div>
         <div class="email-body">
-            <p class="">Hello <%- user.name %>,</p>
+            <p class="">Hello <%= user.name %>,</p>
             <p class="">Thank you for registering with E-Learning, to activate your account, please use the following activation code:</p>
             <h2><%= activationCode %></h2>
             <p class="">Please enter this code on the activation page within the next 5 minutes.</p>

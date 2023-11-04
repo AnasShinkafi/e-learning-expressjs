@@ -296,7 +296,7 @@ export const updateUserInfo = CatchAsyncErrors(
 
       await user?.save();
 
-      await redis.set(userId, JSON.stringify(user));
+      await redis.set(userId, JSON.stringify(user)); 
 
       res.status(201).json({
         success: true,
@@ -439,7 +439,7 @@ export const deleteUser = CatchAsyncErrors(async(req: Request, res: Response, ne
 
     res.status(201).json({
       success: true,
-      message: "User delete successfully",
+      message: "User deleted successfully",
     })
 
   }catch (error: any) {

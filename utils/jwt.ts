@@ -27,6 +27,8 @@ export const accessTokenOptions: ITokenOptions = {
   maxAge: accessTokenExpire * 60 * 60 * 1000,
   httpOnly: true,
   sameSite: "lax",
+  // only for development
+  // secure: true,
 };
 
 export const refreshTokenOptions: ITokenOptions = {
